@@ -180,6 +180,8 @@ app.post("/removeTravellers",function(req,res){
         console.error('Error:', error);
       });
 })
+
+// test
 app.listen(5000, function() {
     console.log('Server up and running.');
   });
