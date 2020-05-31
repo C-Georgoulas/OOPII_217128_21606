@@ -3,6 +3,7 @@ package com.example.java2.Entities;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,11 +14,12 @@ import com.example.java2.Entities.Enums.Museums;
 @Document
 public class Traveller implements Comparable {
 	
-protected static ArrayList<Traveller> TravellersByOrder;
+    private String timestamp;
 	@Id
     private String id;
 	@Indexed
 	private String name;
+	private String username;
 	private int age;
 	private  String city;
 	private String preferedWeather;
@@ -27,6 +29,19 @@ protected static ArrayList<Traveller> TravellersByOrder;
 	private CafeBarRestaur preferedCafesRestaurantsBars;
 	public ArrayList<String> preferedCities;
 	public String visit;
+	private String CountryName;
+	public String getCountryName() {
+		return CountryName;
+	}
+
+
+
+	public void setCountryName(String countryName) {
+		CountryName = countryName;
+	}
+
+
+
 	/**
 	 * @param name
 	 * @param age
@@ -37,9 +52,10 @@ protected static ArrayList<Traveller> TravellersByOrder;
 	 * @param appid
 	 * @throws IOException 
 	 */
-	public Traveller(String name, int age ,String city, String preferedWeather,Enums.Museums preferedMuseums,Enums.CafeBarRestaur preferedCafesRestaurantsBars,ArrayList<String> preferedCities) throws IOException {
+	public Traveller(String name, int age ,String city, String preferedWeather,Enums.Museums preferedMuseums,Enums.CafeBarRestaur preferedCafesRestaurantsBars,ArrayList<String> preferedCities,String username) throws IOException {
 		super();
-		//this.id=id;
+		this.id="" + System.currentTimeMillis();
+		this.timestamp="" + System.currentTimeMillis();
 		this.name = name;
 		this.age = age;
 		this.city=city;
@@ -47,7 +63,32 @@ protected static ArrayList<Traveller> TravellersByOrder;
 		this.preferedMuseums = preferedMuseums;
 		this.preferedCafesRestaurantsBars = preferedCafesRestaurantsBars;
 		this.preferedCities=preferedCities;
-		OpenData.TravellersCityCoordinates(this,city);		
+		this.username=username;
+		OpenData.TravellersCityCoordinates(this,city);	
+	}
+
+
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 
@@ -129,8 +170,7 @@ protected static ArrayList<Traveller> TravellersByOrder;
 				a=similarities.get(similarities.size()-1);
 			}
 		}
-		System.out.println(a+" "+cityfound.toString());
-		return cityfound.getName();
+		return  cityfound.getCityname();
 	}
    
 	public  String CompareCities(ArrayList<City> cities, boolean weather) {
@@ -146,7 +186,7 @@ protected static ArrayList<Traveller> TravellersByOrder;
 			}
 		}
 		}
-		return cityfound.getName();
+		return cityfound.getCityname();
 	}
 	
 	public Museums getPreferedMuseums() {
@@ -287,10 +327,4 @@ protected static ArrayList<Traveller> TravellersByOrder;
 		}
 		return -1;
 	}
-
-
-
-	
-	
-	
 }

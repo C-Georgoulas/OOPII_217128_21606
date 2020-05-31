@@ -10,34 +10,75 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class City {
 	public static ArrayList<City> CitiesSession;
-	@Id
-    public String id;
-	public City(String id, int museums, String name, int cafesRestaurantsBars, String weather, double lat, double lon) {
+	public City( int museums, String name, int cafesRestaurantsBars, String weather, Double lat, Double lon,int timesvisited,int timeslived,String CountryName) {
 		super();
-		this.id = id;
 		this.museums = museums;
-		this.name = name;
+		this.cityname = name;
 		this.cafesRestaurantsBars = cafesRestaurantsBars;
 		this.weather = weather;
 		this.lat = lat;
 		this.lon = lon;
+		this.timesvisited=timesvisited;
+		this.timeslived=timeslived;
+		this.CountryName=CountryName;
+		this.name= lat.toString()+lon.toString();
+		
 	}
 	public String getName() {
 		
-		return name;
+		return this.name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCityname(String name) {
+		this.cityname = name;
 	}
 	@Indexed
 	private int museums;
-	private String name;
+	private String cityname;
+	public static ArrayList<City> getCitiesSession() {
+		return CitiesSession;
+	}
+	public static void setCitiesSession(ArrayList<City> citiesSession) {
+		CitiesSession = citiesSession;
+	}
+	public String getCityname() {
+		return this.cityname;
+	}
+	public void setName(String latlon) {
+		this.name = latlon;
+	}
+	public void setLat(Double lat) {
+		this.lat = lat;
+	}
+	public void setisLon(Double lon) {
+		this.lon = lon;
+	}
 	private int cafesRestaurantsBars;
 	private String weather;
-	private double lat;
-	private double lon;
-	
-
+	private Double lat;
+	private Double lon;
+	private int timesvisited;
+	private int timeslived;
+	private String CountryName;
+	@Id
+	private String name;
+	public int getTimesvisited() {
+		return timesvisited;
+	}
+	public void setTimesvisited(int timesvisited) {
+		this.timesvisited +=timesvisited;
+	}
+	public String getCountryName() {
+		return CountryName;
+	}
+	public void setCountryName(String countryName) {
+		CountryName = countryName;
+	}
+	public int getTimeslived() {
+		return timeslived;
+	}
+	public void setTimeslived(int timeslived) {
+		this.timeslived +=timeslived;
+	}
 	public int getMuseums() {
 		return museums;
 	}
@@ -76,13 +117,6 @@ public class City {
 
 	public void setLon(double lon) {
 		this.lon = lon;
-	}
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
 	}
 	public Traveller FreeTicket(List<Traveller> travellers) {
 		System.out.println("size"+travellers.size());
@@ -132,7 +166,7 @@ public class City {
       
   
    }
-	/*@Override
+	@Override
 	public boolean equals(Object o) {
 		 if (o == this) { 
 	            return true; 
@@ -142,20 +176,18 @@ public class City {
 	            return false; 
 	        } 
 		 else {
-			 City onew=(City) o;
-			 Collections.sor	
-			 if(CitiesSession.stream().map(City::name).filter(onew.getName()::equals).findFirst().isPresent()==true) {
+			 City newcity =(City) o;
+			 if(this.getLat()==newcity.getLat() && this.getLon()==newcity.getLon()) {
 				 return true;
 			 }	
 			 else {
-				 CitiesSession.add(onew);
 				 return false;
 			 }
 		 }
-	}*/
+	}
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", museums=" + museums + ", name=" + name + ", cafesRestaurantsBars="
+		return "City [ museums=" + museums + ", name=" + name + ", cafesRestaurantsBars="
 				+ cafesRestaurantsBars + ", weather=" + weather + ", lat=" + lat + ", lon=" + lon + "]";
 	}
 	

@@ -7,4 +7,7 @@ public class Enums {
 	public enum CafeBarRestaur{
 	 notinterested,interested,veryinterested
 	}
+	public enum LiveorVisitorNeither{
+		live,visit,neither
+	}
 }

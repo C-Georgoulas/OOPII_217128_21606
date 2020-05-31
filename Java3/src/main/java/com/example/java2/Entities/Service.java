@@ -72,19 +72,17 @@ public class Service {
 		preferedCities.add("Barcelona");
 		preferedCities.add("London");
 		preferedCities.add("Copenhagen");
-		Traveller traveller2= new Traveller("John", 20,currentcity,checkweather,museum, cafebarrest,preferedCities);
-		Business traveller1=new Business("Kostas",19,currentcity,checkweather,museum, cafebarrest,preferedCities);
-		Tourist tourist=new Tourist("Kostas",19,currentcity,checkweather,museum, cafebarrest,preferedCities);
+		Traveller traveller2= new Traveller("John", 20,currentcity,checkweather,museum, cafebarrest,preferedCities,"ppp");
+		Business traveller1=new Business("Kostas",19,currentcity,checkweather,museum, cafebarrest,preferedCities,"pppp");
+		Tourist tourist=new Tourist("Kostas",19,currentcity,checkweather,museum, cafebarrest,preferedCities,"ppp");
 	    //Traveller traveller2= new Traveller("John", 20,currentcity,checkweather,museum, cafebarrest,"6bac9239221efa2226041249811f67e6");
 		System.out.println(traveller2.toString());
 		System.out.println(traveller1.toString());
 		ArrayList<City> cities= new ArrayList<City>();
 		for (int i=0;i<preferedCities.size(); i++) {
 			String city=preferedCities.get(i);
-			cities.add(OpenData.RetrieveData(city));
+			cities.add(OpenData.RetrieveData(city,0,0));
 		}
         traveller2.CompareCities(cities);
 	}
-	
-
 }

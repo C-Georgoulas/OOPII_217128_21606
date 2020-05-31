@@ -11,8 +11,8 @@ public class Tourist extends Traveller {
 	
 	
 	
-	public Tourist(String name, int age ,String city, String preferedWeather,Enums.Museums preferedMuseums,Enums.CafeBarRestaur preferedCafesRestaurantsBars,ArrayList<String> preferedCities) throws IOException{
-		super(name,age,city,preferedWeather,preferedMuseums,preferedCafesRestaurantsBars,preferedCities);
+	public Tourist(String name, int age ,String city, String preferedWeather,Enums.Museums preferedMuseums,Enums.CafeBarRestaur preferedCafesRestaurantsBars,ArrayList<String> preferedCities,String username) throws IOException{
+		super(name,age,city,preferedWeather,preferedMuseums,preferedCafesRestaurantsBars,preferedCities,username);
 	 }
 	
 	
@@ -84,8 +84,7 @@ public class Tourist extends Traveller {
 				a=similarities.get(similarities.size()-1);
 			}
 		}
-		System.out.println(a+" "+cityfound.toString());
-		return cityfound.getName();
+		return cityfound.getCityname();
 	}
 	@Override
     public String CompareCities(ArrayList<City> cities, boolean weather) {
@@ -101,7 +100,7 @@ public class Tourist extends Traveller {
 			}
 		}
 		}
-		return cityfound.getName();
+		return cityfound.getCityname();
 	}
 }
 

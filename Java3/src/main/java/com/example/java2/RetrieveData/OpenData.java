@@ -28,7 +28,7 @@ public class OpenData {
 		}
 		return i;
 	}
-	public static City RetrieveData(String city) throws  IOException {
+	public static City RetrieveData(String city,int timeslived,int timesvisited) throws  IOException {
 		 ObjectMapper mapper = new ObjectMapper(); 
 		 OpenWeatherMap weather_obj=null; 
 		 MediaWiki mediaWiki_obj=mapper.readValue(new URL("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles="+city+"&format=json&formatversion=2"),MediaWiki.class);	
@@ -46,24 +46,18 @@ public class OpenData {
 		 String weather=weather_obj.getWeather().get(0).getMain();
 		 double lat= weather_obj.getCoord().getLat();
 		 double lon= weather_obj.getCoord().getLon();
-		 City city_info = new City(null,museums,city,cafeRestaurantBar,weather,lat,lon);
-		 System.out.println(city_info);
+		 String countryname=weather_obj.getSys().getCountry();
+		 City city_info = new City(museums,city,cafeRestaurantBar,weather,lat,lon,timesvisited,timeslived,countryname);
 		 return city_info;
 	}
 	public  static  void TravellersCityCoordinates(Traveller traveller,String city) throws IOException {
 		ObjectMapper mapper = new ObjectMapper(); 
 		OpenWeatherMap weather_obj = mapper.readValue(new URL("http://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=a9414d4e18e890688dc1c0ab7d4db7ba"),OpenWeatherMap.class);
 		double lat= weather_obj.getCoord().getLat();
-		double lon= weather_obj.getCoord().getLon();	
+		double lon= weather_obj.getCoord().getLon();
+		String countryname =weather_obj.getSys().getCountry();
 		traveller.setCurrentlat(lat);
 		traveller.setCurrentlon(lon);
+		traveller.setCountryName(countryname);
 	}
-	/*public static  Business TravellersCityCoordinates2(String name, int age ,String preferedWeather,Museums preferedMuseums, CafeBarRestaur preferedCafesRestaurantsBars,String city, String appid) throws IOException {
-		ObjectMapper mapper = new ObjectMapper(); 
-		OpenWeatherMap weather_obj = mapper.readValue(new URL("http://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID="+appid+""), OpenWeatherMap.class);
-		double lat= weather_obj.getCoord().getLat();
-		double lon= weather_obj.getCoord().getLon();
-	    Business traveller = new Business(name,age,lat,lon,preferedWeather,preferedMuseums,preferedCafesRestaurantsBars);
-		return traveller;
-	}*/
 }

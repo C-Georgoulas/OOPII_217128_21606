@@ -27,6 +27,11 @@ public class TravellerRepository {
         query.addCriteria(Criteria.where("id").is(id));
         mongoTemplate.remove(query, Traveller.class);
     }
+	public void deleteByUsername(String username) {
+		Query query = new Query();
+        query.addCriteria(Criteria.where("username").is(username));
+        mongoTemplate.findAllAndRemove(query, Traveller.class);
+	}
 	public Traveller save(Traveller traveller) {
         mongoTemplate.save(traveller);
         return traveller;

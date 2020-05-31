@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Business extends Traveller {
 
-	public Business(String name, int age ,String city, String preferedWeather,Enums.Museums preferedMuseums,Enums.CafeBarRestaur preferedCafesRestaurantsBars,ArrayList<String> preferedCities) throws IOException {
-		super(name, age, city, preferedWeather, preferedMuseums, preferedCafesRestaurantsBars,preferedCities);
+	public Business(String name, int age ,String city, String preferedWeather,Enums.Museums preferedMuseums,Enums.CafeBarRestaur preferedCafesRestaurantsBars,ArrayList<String> preferedCities,String username) throws IOException {
+		super(name, age, city, preferedWeather, preferedMuseums, preferedCafesRestaurantsBars,preferedCities,username);
 		}
 	
 	@Override
@@ -27,7 +27,7 @@ public class Business extends Traveller {
 				nearestcity=city;
 			}
 		}
-		System.out.println("City is"+nearestcity.toString());
+		
 		return nearestcity.getName();
 	}
 	@Override
@@ -40,7 +40,7 @@ public class Business extends Traveller {
 				nearestcity=city;
 			}
 		}
-		return nearestcity.getName();
+		return nearestcity.getCityname();
 	}
 
 }

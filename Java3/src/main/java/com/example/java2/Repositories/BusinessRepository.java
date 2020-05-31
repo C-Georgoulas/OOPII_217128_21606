@@ -26,6 +26,11 @@ public class BusinessRepository {
         mongoTemplate.save(business);
         return business;
     }
+	public void deleteByUsername(String username) {
+		Query query = new Query();
+        query.addCriteria(Criteria.where("username").is(username));
+        mongoTemplate.findAllAndRemove(query, Business.class);
+	}
 	public List<Business> findById(String id) {
         Query query = new Query();
         query.addCriteria(Criteria.where("id").is(id));
